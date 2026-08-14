@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ephemeral Events | Model United Nations</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- EmailJS SDK (Sends notifications to mayanktech79@gmail.com) -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 900: '#0B132B', 800: '#1C2541', 700: '#2A365B' },
+            burgundy: { 900: '#3A0813', 800: '#5C0D1E', 700: '#800A22' },
+            gold: { 400: '#F3E5AB', 500: '#D4AF37', 600: '#AA7C11' },
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA7C11 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glass-card {
+      background: rgba(28, 37, 65, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-navy-900 text-gray-100 font-sans antialiased selection:bg-gold-500 selection:text-navy-900 min-h-screen flex flex-col justify-between">
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="sticky top-0 z-40 bg-navy-900/95 backdrop-blur-md border-b border-gold-500/20 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-burgundy-800 border border-gold-500 flex items-center justify-center text-gold-500 font-serif font-bold text-xl shadow-lg">
+          E
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-widest text-gold-500 font-semibold">Ephemeral Events</span>
+          <span class="text-lg font-serif font-bold tracking-wide text-white">Model United Nations</span>
+        </div>
+      </div>
+      
+      <div class="hidden md:flex space-x-8 text-sm font-medium items-center">
+        <a href="#about" class="hover:text-gold-400 transition">About</a>
+        <a href="#committees" class="hover:text-gold-400 transition">Committees</a>
+        <a href="#resources" class="hover:text-gold-400 transition">Sheets & Resources</a>
+        <a href="#register" class="px-5 py-2 rounded-full bg-burgundy-800 hover:bg-burgundy-700 border border-gold-500/50 text-gold-400 font-semibold transition shadow-lg">
+          Register Now
+        </a>
+        <button onclick="toggleAdminModal()" class="text-gray-400 hover:text-gold-400 text-xs flex items-center gap-1.5 border border-gray-700 hover:border-gold-500/50 px-3 py-1.5 rounded-lg transition">
+          <i class="fa-solid fa-lock"></i> Admin Portal
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button onclick="toggleMobileMenu()" class="md:hidden text-gold-500 text-2xl focus:outline-none p-1">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-800 pt-4 space-y-3 px-2">
+      <a href="#about" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold-400 font-medium py-1">About</a>
+      <a href="#committees" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold-400 font-medium py-1">Committees</a>
+      <a href="#resources" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-gold-400 font-medium py-1">Sheets & Resources</a>
+      <a href="#register" onclick="toggleMobileMenu()" class="block text-gold-400 font-bold py-1">Register Now</a>
+      <button onclick="toggleMobileMenu(); toggleAdminModal()" class="w-full text-left text-gray-400 hover:text-gold-400 text-sm py-2 border-t border-gray-800 mt-2">
+        <i class="fa-solid fa-lock mr-2"></i> Admin Portal
+      </button>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <header id="about" class="relative py-24 px-6 text-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-burgundy-900/40 via-navy-900 to-navy-900 border-b border-gold-500/20">
+    <div class="max-w-4xl mx-auto relative z-10">
+      <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-gold-500/30 bg-navy-800/80 text-gold-400 text-xs tracking-widest uppercase font-semibold">
+        Presented by Ephemeral Events
+      </div>
+      <h1 class="text-4xl md:text-6xl font-serif font-extrabold tracking-tight mb-6 gold-gradient-text leading-tight">
+        Diplomacy. Debate. Deliverance.
+      </h1>
+      <p class="text-base md:text-lg text-gray-300 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+        Step into the arena of global diplomacy. Join leaders, thinkers, and visionary student delegates to address critical geopolitical challenges.
+      </p>
+
+      <!-- FEATURE 1: EXACT COUNTDOWN CLOCK -->
+      <div class="mb-10 max-w-xl mx-auto glass-card p-5 rounded-2xl border border-gold-500/40 shadow-xl">
+        <span class="block text-xs uppercase tracking-widest text-gold-400 font-bold mb-3"><i class="fa-solid fa-hourglass-start mr-1"></i> Conference Countdown</span>
+        <div id="countdown-timer" class="grid grid-cols-4 gap-2 text-center">
+          <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
+            <span id="cd-days" class="block text-2xl md:text-3xl font-serif font-bold text-white">00</span>
+            <span class="text-[10px] uppercase text-gray-400">Days</span>
+          </div>
+          <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
+            <span id="cd-hours" class="block text-2xl md:text-3xl font-serif font-bold text-white">00</span>
+            <span class="text-[10px] uppercase text-gray-400">Hours</span>
+          </div>
+          <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
+            <span id="cd-mins" class="block text-2xl md:text-3xl font-serif font-bold text-white">00</span>
+            <span class="text-[10px] uppercase text-gray-400">Minutes</span>
+          </div>
+          <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
+            <span id="cd-secs" class="block text-2xl md:text-3xl font-serif font-bold text-gold-400">00</span>
+            <span class="text-[10px] uppercase text-gray-400">Seconds</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 text-center">
+        <div class="glass-card p-5 rounded-xl">
+          <i class="fa-solid fa-calendar-days text-gold-500 text-xl mb-2"></i>
+          <span class="block text-xs uppercase tracking-wider text-gray-400">Dates</span>
+          <span id="display-dates" class="font-serif font-bold text-base text-white">June 27–28, 2026</span>
+        </div>
+        <div class="glass-card p-5 rounded-xl">
+          <i class="fa-solid fa-location-dot text-gold-500 text-xl mb-2"></i>
+          <span class="block text-xs uppercase tracking-wider text-gray-400">Venue</span>
+          <span id="display-venue" class="font-serif font-bold text-base text-white">MGSIPA, Sector 26, Chandigarh</span>
+        </div>
+        <div class="glass-card p-5 rounded-xl">
+          <i class="fa-solid fa-ticket text-gold-500 text-xl mb-2"></i>
+          <span class="block text-xs uppercase tracking-wider text-gray-400">Delegate Fee</span>
+          <span id="display-fee" class="font-serif font-bold text-base text-gold-400">₹1,800 / Delegate</span>
+        </div>
+      </div>
+
+      <a href="#register" class="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-burgundy-800 to-burgundy-700 hover:from-burgundy-700 text-gold-400 font-bold border border-gold-500 shadow-xl transition transform hover:-translate-y-0.5">
+        Register Delegation Now
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= COMMITTEES SECTION ================= -->
+  <section id="committees" class="py-20 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-3">Committees & Country Matrix</h2>
+      <div class="w-24 h-1 bg-gold-500 mx-auto rounded-full mb-4"></div>
+      <p class="text-gray-400 max-w-xl mx-auto text-sm">Click on any committee below to view all available country portfolios, real-time registration status, and verified allotments.</p>
+    </div>
+
+    <!-- FEATURE 2 & 4: CLICKABLE COMMITTEES LIST & MATRIX -->
+    <div id="committees-list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Dynamically Rendered -->
+    </div>
+  </section>
+
+  <!-- COMMITTEE DETAIL MODAL (FEATURE 2 & 4) -->
+  <div id="committeeModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-card max-w-3xl w-full p-6 md:p-8 rounded-2xl relative border border-gold-500/40 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeCommitteeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="modal-committee-content">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= RESOURCES & SHEETS ================= -->
+  <section id="resources" class="py-16 px-6 bg-navy-800/40 border-y border-gold-500/10">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-8 text-center md:text-left">
+        <h2 class="text-2xl md:text-3xl font-serif font-bold text-white">Official Matrices & Resources</h2>
+        <p class="text-gray-400 text-sm mt-1">Access real-time country allotment sheets, background guides, and rules of procedure.</p>
+      </div>
+
+      <div id="resources-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Dynamically Rendered -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REGISTRATION FORM ================= -->
+  <section id="register" class="py-20 px-6 max-w-4xl mx-auto">
+    <div class="glass-card rounded-2xl p-6 md:p-12 shadow-2xl">
+      <div class="text-center mb-10">
+        <span class="text-gold-500 uppercase tracking-widest text-xs font-bold">Delegate Portal</span>
+        <h2 class="text-3xl font-serif font-bold text-white mt-1">Register for Ephemeral MUN</h2>
+        <p class="text-gray-400 text-sm mt-2">Fill out your details below and upload your payment transaction proof.</p>
+      </div>
+
+      <form id="registrationForm" onsubmit="handleRegister(event)" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Full Name *</label>
+            <input type="text" id="reg-name" required placeholder="e.g. Rahul Sharma" class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Email Address *</label>
+            <input type="email" id="reg-email" required placeholder="name@domain.com" class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Phone / WhatsApp *</label>
+            <input type="tel" id="reg-phone" required placeholder="+91 9876543210" class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+          </div>
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">School / Institution *</label>
+            <input type="text" id="reg-institution" required placeholder="e.g. GMSSS Sector 13" class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Select Committee *</label>
+            <select id="reg-committee" required onchange="updateCountryDropdown()" class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+              <!-- Rendered via JS -->
+            </select>
+          </div>
+          <div>
+            <!-- FEATURE 3: SELECTION ITEMS FOR COUNTRY PORTFOLIOS -->
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Select Country / Portfolio *</label>
+            <select id="reg-portfolio" required class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+              <option value="">-- First select a committee --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-navy-900 p-6 rounded-xl border border-gold-500/20 space-y-4">
+          <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+            <span class="text-sm font-semibold text-gold-400"><i class="fa-solid fa-qrcode mr-2"></i> Payment Details</span>
+            <span id="form-fee-display" class="text-sm font-bold text-white">Fee: ₹1,800</span>
+          </div>
+
+          <!-- QR CODE IMAGE DISPLAY -->
+          <div class="text-center py-2">
+            <img src="https://cdn.phototourl.com/free/2026-08-14-8bc4200c-2f50-4f9b-ab04-86dcb4bf1839.jpg" alt="UPI Payment QR Code" class="w-36 h-36 object-contain mx-auto rounded-lg border border-gold-500/40 bg-white p-2 shadow-md">
+            <span class="block text-[10px] text-gray-400 mt-1">Scan QR via GPay, PhonePe, Paytm, or BHIM</span>
+          </div>
+
+          <p class="text-xs text-gray-400 text-center">
+            UPI ID: <strong class="text-gold-400 select-all">ephemeral@upi</strong> | Phone: <strong>+91 9876543210</strong>
+          </p>
+
+          <div>
+            <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Payment Proof Screenshot *</label>
+            <input type="file" id="reg-screenshot" accept="image/*" required onchange="handleImageUpload(this)" class="w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-burgundy-800 file:text-gold-400 hover:file:bg-burgundy-700">
+            <input type="hidden" id="screenshot-base64">
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn" class="w-full py-4 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-base uppercase tracking-wider transition shadow-lg">
+          Submit Delegate Registration
+        </button>
+      </form>
+
+      <div id="registrationSuccess" class="hidden text-center py-12 space-y-4">
+        <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto text-3xl border border-green-500/40">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h3 class="text-2xl font-serif font-bold text-white">Registration Submitted!</h3>
+        <p class="text-gray-300 text-sm max-w-md mx-auto">
+          Your details and payment proof have been received. An email notification has been dispatched to <strong>mayanktech79@gmail.com</strong>.
+        </p>
+        <button onclick="resetRegForm()" class="text-xs text-gold-400 underline hover:text-gold-300 pt-2 block mx-auto">
+          Submit another registration
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-navy-900 border-t border-gold-500/20 py-8 px-6 text-center text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <span class="font-serif font-bold text-gold-500">Ephemeral Events MUN</span> &copy; 2026. All Rights Reserved.
+      </div>
+      <div class="flex space-x-6">
+        <a href="#about" class="hover:text-gold-400">About</a>
+        <a href="#committees" class="hover:text-gold-400">Committees</a>
+        <a href="#resources" class="hover:text-gold-400">Resources</a>
+        <button onclick="toggleAdminModal()" class="hover:text-gold-400">Admin Portal</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= ADMIN LOGIN MODAL ================= -->
+  <div id="adminLoginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="glass-card max-w-md w-full p-8 rounded-2xl relative border border-gold-500/40 shadow-2xl">
+      <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+      <h3 class="text-2xl font-serif font-bold text-white mb-1">Admin Access</h3>
+      <p class="text-xs text-gray-400 mb-6">Enter password to open your live event dashboard.</p>
+      
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-gray-300 mb-2 font-semibold">Password</label>
+          <input type="password" id="admin-pass" required placeholder="Default password: admin123" class="w-full bg-navy-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500">
+        </div>
+        <p id="admin-login-error" class="text-red-400 text-xs hidden font-medium">Incorrect password. Please try again.</p>
+        <button type="submit" class="w-full py-3 bg-burgundy-800 hover:bg-burgundy-700 text-gold-400 font-bold rounded-lg border border-gold-500/50 transition">
+          Login to Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= ADMIN DASHBOARD ================= -->
+  <div id="adminDashboard" class="fixed inset-0 bg-navy-900 z-50 overflow-y-auto hidden">
+    <div class="bg-navy-800 border-b border-gold-500/20 px-6 py-4 flex justify-between items-center sticky top-0 z-10 shadow-md">
+      <div class="flex items-center gap-3">
+        <span class="font-serif font-bold text-gold-500 text-lg">Ephemeral Admin Dashboard</span>
+      </div>
+      <button onclick="closeAdminDashboard()" class="px-4 py-2 bg-burgundy-800 text-gold-400 text-xs font-bold rounded-lg border border-gold-500/40 hover:bg-burgundy-700 transition">
+        <i class="fa-solid fa-right-from-bracket mr-1"></i> Exit Admin
+      </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto p-6 space-y-8">
+
+      <!-- Settings Form -->
+      <div class="glass-card p-6 rounded-xl border border-gold-500/30">
+        <h3 class="text-lg font-serif font-bold text-gold-400 mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-gear"></i> Event Settings & Admin Password
+        </h3>
+        <form onsubmit="saveEventDetails(event)" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-xs uppercase text-gray-400 mb-1 font-semibold">Event Dates</label>
+            <input type="text" id="edit-dates" class="w-full bg-navy-900 border border-gray-700 rounded p-2 text-sm text-white">
+          </div>
+          <div>
+            <label class="block text-xs uppercase text-gray-400 mb-1 font-semibold">Venue</label>
+            <input type="text" id="edit-venue" class="w-full bg-navy-900 border border-gray-700 rounded p-2 text-sm text-white">
+          </div>
+          <div>
+            <label class="block text-xs uppercase text-gray-400 mb-1 font-semibold">Fee</label>
+            <input type="text" id="edit-fee" class="w-full bg-navy-900 border border-gray-700 rounded p-2 text-sm text-white">
+          </div>
+          <div>
+            <label class="block text-xs uppercase text-gray-400 mb-1 font-semibold">Admin Password</label>
+            <input type="text" id="edit-password" class="w-full bg-navy-900 border border-gray-700 rounded p-2 text-sm text-white">
+          </div>
+          <div class="md:col-span-4 text-right">
+            <button type="submit" class="px-6 py-2.5 bg-gold-500 text-navy-900 font-bold rounded hover:bg-gold-600 text-xs uppercase tracking-wider">
+              Save Settings
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Committees Management -->
+      <div class="glass-card p-6 rounded-xl border border-gold-500/30">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-serif font-bold text-gold-400 flex items-center gap-2">
+            <i class="fa-solid fa-users"></i> Manage Committees & Countries
+          </h3>
+          <button onclick="addCommitteePrompt()" class="px-3 py-1.5 bg-burgundy-800 text-gold-400 text-xs font-semibold rounded border border-gold-500/30">
+            + Add Committee
+          </button>
+        </div>
+        <div id="admin-committee-list" class="space-y-3">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Resources Management -->
+      <div class="glass-card p-6 rounded-xl border border-gold-500/30">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-serif font-bold text-gold-400 flex items-center gap-2">
+            <i class="fa-solid fa-file-excel"></i> Manage Sheets & Resource Links
+          </h3>
+          <button onclick="addResourcePrompt()" class="px-3 py-1.5 bg-burgundy-800 text-gold-400 text-xs font-semibold rounded border border-gold-500/30">
+            + Add Sheet / Link
+          </button>
+        </div>
+        <div id="admin-resource-list" class="space-y-3">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- Responses Table -->
+      <div class="glass-card p-6 rounded-xl border border-gold-500/30">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
+          <h3 class="text-lg font-serif font-bold text-gold-400 flex items-center gap-2">
+            <i class="fa-solid fa-address-book"></i> Delegate Registrations (<span id="reg-count">0</span>)
+          </h3>
+          <button onclick="exportToCSV()" class="px-4 py-2 bg-green-700 hover:bg-green-600 text-white text-xs font-bold rounded flex items-center gap-2">
+            <i class="fa-solid fa-file-csv"></i> Export CSV Spreadsheet
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-gray-700 bg-navy-900 text-gray-300">
+                <th class="p-3">Delegate</th>
+                <th class="p-3">Contact</th>
+                <th class="p-3">Institution</th>
+                <th class="p-3">Committee & Portfolio</th>
+                <th class="p-3">Payment Proof</th>
+                <th class="p-3">Status</th>
+                <th class="p-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-registration-table" class="divide-y divide-gray-800">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCREENSHOT PREVIEW MODAL -->
+  <div id="imgModal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4" onclick="closeImgModal()">
+    <div class="relative max-w-lg w-full" onclick="event.stopPropagation()">
+      <button onclick="closeImgModal()" class="absolute -top-10 right-0 text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
+      <img id="imgModalSrc" src="" class="w-full h-auto max-h-[80vh] object-contain rounded-lg border border-gold-500">
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Initialize EmailJS
+    (function(){
+      emailjs.init("PUBLIC_KEY_HERE"); // Replace with EmailJS Public Key if active
+    })();
+
+    // Default 5 Committees with country portfolios for matrices
+    const initialData = {
+      adminPassword: "admin123",
+      dates: "June 27–28, 2026",
+      venue: "MGSIPA, Sector 26, Chandigarh",
+      fee: "₹1,800 / Delegate",
+      committees: [
+        { 
+          id: 1, 
+          name: "UNSC (United Nations Security Council)", 
+          agenda: "Maintaining peace and security in disputed geopolitical territories.",
+          countries: ["United States of America", "United Kingdom", "France", "Russian Federation", "People's Republic of China", "India", "Japan", "Brazil", "Germany", "Canada", "Australia", "South Korea"]
+        },
+        { 
+          id: 2, 
+          name: "UNHRC (Human Rights Council)", 
+          agenda: "Safeguarding human rights in areas of conflict and displacement.",
+          countries: ["Switzerland", "Sweden", "Norway", "South Africa", "Argentina", "Mexico", "Italy", "Netherlands", "Japan", "Ukraine", "Syria", "Palestine"]
+        },
+        { 
+          id: 3, 
+          name: "DISEC (Disarmament & Int. Security)", 
+          agenda: "Addressing global disarmament and autonomous weapons risks.",
+          countries: ["United States", "China", "Russia", "Pakistan", "Iran", "Israel", "North Korea", "Germany", "United Kingdom", "India", "Japan", "Turkey"]
+        },
+        { 
+          id: 4, 
+          name: "AIPPM (All India Political Parties Meet)", 
+          agenda: "Deliberating electoral reforms and internal security policies.",
+          countries: ["Bharatiya Janata Party (BJP)", "Indian National Congress (INC)", "Aam Aadmi Party (AAP)", "All India Trinamool Congress (AITC)", "Dravida Munnetra Kazhagam (DMK)", "Communist Party of India (Marxist)", "Samajwadi Party", "Janata Dal (United)"]
+        },
+        { 
+          id: 5, 
+          name: "IP (International Press)", 
+          agenda: "Journalistic reporting, photography, and press conferences.",
+          countries: ["Reuters", "BBC News", "Al Jazeera", "CNN", "The New York Times", "The Hindu", "Agence France-Presse (AFP)", "Associated Press (AP)"]
+        }
+      ],
+      resources: [
+        { id: 1, title: "Official Country Matrix (Google Sheet)", url: "https://docs.google.com/spreadsheets/", type: "Google Sheet" },
+        { id: 2, title: "Rules of Procedure & Delegate Handbook", url: "#", type: "PDF Guide" }
+      ],
+      registrations: []
+    };
+
+    function getAppData() {
+      try {
+        const stored = localStorage.getItem('ephemeral_mun_data');
+        if (!stored) {
+          localStorage.setItem('ephemeral_mun_data', JSON.stringify(initialData));
+          return initialData;
+        }
+        return JSON.parse(stored);
+      } catch(e) {
+        return initialData;
+      }
+    }
+
+    function saveAppData(data) {
+      localStorage.setItem('ephemeral_mun_data', JSON.stringify(data));
+      renderApp();
+    }
+
+    // FEATURE 1: EXACT COUNTDOWN CLOCK TO CONFERENCE START
+    function startCountdown() {
+      // Set target date to June 27, 2026, 09:00:00 AM
+      const targetDate = new Date("June 27, 2026 09:00:00").getTime();
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference > 0) {
+          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+          document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+          document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+          document.getElementById('cd-mins').innerText = String(minutes).padStart(2, '0');
+          document.getElementById('cd-secs').innerText = String(seconds).padStart(2, '0');
+        } else {
+          document.getElementById('countdown-timer').innerHTML = "<div class='col-span-4 text-gold-400 font-bold text-base'>Conference is Live Now!</div>";
+        }
+      }, 1000);
+    }
+
+    function renderApp() {
+      const data = getAppData();
+
+      document.getElementById('display-dates').innerText = data.dates;
+      document.getElementById('display-venue').innerText = data.venue;
+      document.getElementById('display-fee').innerText = data.fee;
+      document.getElementById('form-fee-display').innerText = "Fee: " + data.fee;
+
+      // Render Committees & Metrics (FEATURE 2 & FEATURE 4)
+      const commContainer = document.getElementById('committees-list');
+      const selectComm = document.getElementById('reg-committee');
+      commContainer.innerHTML = '';
+      selectComm.innerHTML = '<option value="">-- Choose a Committee --</option>';
+
+      data.committees.forEach(c => {
+        // Calculate real registration numbers and verified paid delegates for this committee
+        const commRegs = data.registrations.filter(r => r.committee === c.name);
+        const totalRegCount = commRegs.length;
+        const verifiedCount = commRegs.filter(r => r.status === 'Verified').length;
+        const totalCountries = c.countries ? c.countries.length : 0;
+
+        commContainer.innerHTML += `
+          <div class="glass-card p-6 rounded-xl cursor-pointer hover:border-gold-500 transition group flex flex-col justify-between" onclick="openCommitteeModal('${c.name}')">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-[10px] uppercase bg-burgundy-800 text-gold-400 px-2 py-0.5 rounded font-bold">${totalCountries} Portfolios</span>
+                <span class="text-xs text-green-400 font-semibold"><i class="fa-solid fa-users mr-1"></i> ${totalRegCount} Registered (${verifiedCount} Paid)</span>
+              </div>
+              <h3 class="text-xl font-serif font-bold text-gold-400 mb-2 group-hover:text-white transition">${c.name}</h3>
+              <p class="text-xs text-gray-300 leading-relaxed mb-4"><strong class="text-gray-400">Agenda:</strong> ${c.agenda}</p>
+            </div>
+            <div class="text-xs text-gold-400 font-semibold flex items-center gap-1 pt-2 border-t border-gray-800">
+              <i class="fa-solid fa-table-cells"></i> View Country Matrix & Allotments <i class="fa-solid fa-arrow-right text-[10px] ml-auto"></i>
+            </div>
+          </div>
+        `;
+        selectComm.innerHTML += `<option value="${c.name}">${c.name}</option>`;
+      });
+
+      // Render Resources
+      const resContainer = document.getElementById('resources-list');
+      resContainer.innerHTML = '';
+      data.resources.forEach(r => {
+        resContainer.innerHTML += `
+          <div class="bg-navy-900/90 p-4 rounded-xl border border-gray-800 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-gold-500 uppercase tracking-wider font-semibold">${r.type}</span>
+              <h4 class="text-white font-medium text-sm">${r.title}</h4>
+            </div>
+            <a href="${r.url}" target="_blank" class="px-3 py-1.5 bg-burgundy-800 hover:bg-burgundy-700 text-gold-400 text-xs rounded border border-gold-500/30 flex items-center gap-1">
+              Open Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        `;
+      });
+
+      updateCountryDropdown();
+    }
+
+    // FEATURE 3: UPDATE COUNTRY DROPDOWN ON COMMITTEE SELECTION
+    function updateCountryDropdown() {
+      const selectedCommName = document.getElementById('reg-committee').value;
+      const portfolioSelect = document.getElementById('reg-portfolio');
+      portfolioSelect.innerHTML = '';
+
+      if (!selectedCommName) {
+        portfolioSelect.innerHTML = '<option value="">-- First select a committee --</option>';
+        return;
+      }
+
+      const data = getAppData();
+      const committee = data.committees.find(c => c.name === selectedCommName);
+
+      if (!committee || !committee.countries || committee.countries.length === 0) {
+        portfolioSelect.innerHTML = '<option value="">No portfolios available</option>';
+        return;
+      }
+
+      portfolioSelect.innerHTML = '<option value="">-- Select Country / Portfolio --</option>';
+      committee.countries.forEach(country => {
+        // Check if country is already verified/taken
+        const isTaken = data.registrations.some(r => r.committee === selectedCommName && r.portfolio === country && r.status === 'Verified');
+        const labelTag = isTaken ? `${country} (Already Allotted)` : country;
+        
+        const option = document.createElement('option');
+        option.value = country;
+        option.innerText = labelTag;
+        if (isTaken) option.disabled = true;
+        portfolioSelect.appendChild(option);
+      });
+    }
+
+    // FEATURE 2 & 4: COMMITTEE MATRIX MODAL OPENER
+    function openCommitteeModal(committeeName) {
+      const data = getAppData();
+      const committee = data.committees.find(c => c.name === committeeName);
+      if (!committee) return;
+
+      const commRegs = data.registrations.filter(r => r.committee === committeeName);
+      const totalRegs = commRegs.length;
+      const verifiedRegs = commRegs.filter(r => r.status === 'Verified').length;
+
+      let html = `
+        <div class="mb-6 border-b border-gray-800 pb-4">
+          <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Committee Matrix</span>
+          <h3 class="text-2xl font-serif font-bold text-white mt-1">${committee.name}</h3>
+          <p class="text-xs text-gray-300 mt-2"><strong class="text-gray-400">Agenda:</strong> ${committee.agenda}</p>
+          <div class="flex gap-4 mt-4 text-xs">
+            <span class="bg-navy-900 px-3 py-1.5 rounded border border-gray-700 text-gray-200"><i class="fa-solid fa-flag mr-1 text-gold-400"></i> Total Portfolios: <strong>${committee.countries ? committee.countries.length : 0}</strong></span>
+            <span class="bg-navy-900 px-3 py-1.5 rounded border border-gray-700 text-gray-200"><i class="fa-solid fa-users mr-1 text-gold-400"></i> Total Registrations: <strong>${totalRegs}</strong></span>
+            <span class="bg-navy-900 px-3 py-1.5 rounded border border-gray-700 text-green-400"><i class="fa-solid fa-circle-check mr-1"></i> Verified & Paid: <strong>${verifiedRegs}</strong></span>
+          </div>
+        </div>
+
+        <h4 class="text-sm font-bold text-gold-400 uppercase tracking-wider mb-3">Country Allotment Matrix</h4>
+        <p class="text-xs text-gray-400 mb-4">Portfolios marked in <span class="text-red-400 font-bold">Red</span> are already registered and verified.</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      `;
+
+      if (committee.countries && committee.countries.length > 0) {
+        committee.countries.forEach(country => {
+          const matchedReg = commRegs.find(r => r.portfolio === country);
+          const isVerified = matchedReg && matchedReg.status === 'Verified';
+          const isPending = matchedReg && matchedReg.status === 'Pending';
+
+          let statusClass = "bg-navy-900 border-gray-700 text-gray-200";
+          let statusBadge = "<span class='text-[10px] text-gray-400 block'>Available</span>";
+
+          if (isVerified) {
+            statusClass = "bg-red-950/40 border-red-500/60 text-red-300"; // Marked Red for verified/taken
+            statusBadge = `<span class='text-[10px] text-red-400 font-bold block'>Verified (${matchedReg.name})</span>`;
+          } else if (isPending) {
+            statusClass = "bg-yellow-950/30 border-yellow-500/40 text-yellow-200";
+            statusBadge = `<span class='text-[10px] text-yellow-400 block'>Pending Verification</span>`;
+          }
+
+          html += `
+            <div class="p-3 rounded-lg border ${statusClass} flex flex-col justify-between text-xs">
+              <span class="font-semibold">${country}</span>
+              <div class="mt-2">${statusBadge}</div>
+            </div>
+          `;
+        });
+      } else {
+        html += `<div class="col-span-full text-gray-500 text-center py-4">No countries listed for this committee yet.</div>`;
+      }
+
+      html += `</div>`;
+
+      document.getElementById('modal-committee-content').innerHTML = html;
+      document.getElementById('committeeModal').classList.remove('hidden');
+    }
+
+    function closeCommitteeModal() {
+      document.getElementById('committeeModal').classList.add('hidden');
+    }
+
+    function handleImageUpload(element) {
+      let file = element.files[0];
+      if (!file) return;
+      let reader = new FileReader();
+      reader.onloadend = function() {
+        document.getElementById('screenshot-base64').value = reader.result;
+      }
+      reader.readAsDataURL(file);
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.innerText = "Submitting...";
+      submitBtn.disabled = true;
+
+      const data = getAppData();
+      const newReg = {
+        id: Date.now(),
+        name: document.getElementById('reg-name').value.trim(),
+        email: document.getElementById('reg-email').value.trim(),
+        phone: document.getElementById('reg-phone').value.trim(),
+        institution: document.getElementById('reg-institution').value.trim(),
+        committee: document.getElementById('reg-committee').value,
+        portfolio: document.getElementById('reg-portfolio').value,
+        screenshot: document.getElementById('screenshot-base64').value || '',
+        status: 'Pending',
+        timestamp: new Date().toLocaleDateString()
+      };
+
+      data.registrations.push(newReg);
+      saveAppData(data);
+
+      // Email Notification trigger
+      const templateParams = {
+        to_email: 'mayanktech79@gmail.com',
+        delegate_name: newReg.name,
+        delegate_email: newReg.email,
+        delegate_phone: newReg.phone,
+        institution: newReg.institution,
+        committee: newReg.committee,
+        portfolio: newReg.portfolio
+      };
+
+      if (window.emailjs && emailjs.send) {
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+          .catch(err => console.log('Email dispatch fallback:', err));
+      }
+
+      submitBtn.innerText = "Submit Delegate Registration";
+      submitBtn.disabled = false;
+
+      document.getElementById('registrationForm').reset();
+      document.getElementById('registrationForm').classList.add('hidden');
+      document.getElementById('registrationSuccess').classList.remove('hidden');
+    }
+
+    function resetRegForm() {
+      document.getElementById('registrationForm').classList.remove('hidden');
+      document.getElementById('registrationSuccess').classList.add('hidden');
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    function toggleAdminModal() {
+      document.getElementById('adminLoginModal').classList.toggle('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const passInput = document.getElementById('admin-pass').value;
+      const data = getAppData();
+
+      if (passInput === (data.adminPassword || 'admin123')) {
+        document.getElementById('adminLoginModal').classList.add('hidden');
+        document.getElementById('admin-pass').value = '';
+        document.getElementById('admin-login-error').classList.add('hidden');
+        openAdminDashboard();
+      } else {
+        document.getElementById('admin-login-error').classList.remove('hidden');
+      }
+    }
+
+    function openAdminDashboard() {
+      const data = getAppData();
+      document.getElementById('adminDashboard').classList.remove('hidden');
+
+      document.getElementById('edit-dates').value = data.dates;
+      document.getElementById('edit-venue').value = data.venue;
+      document.getElementById('edit-fee').value = data.fee;
+      document.getElementById('edit-password').value = data.adminPassword || 'admin123';
+
+      renderAdminTables();
+    }
+
+    function closeAdminDashboard() {
+      document.getElementById('adminDashboard').classList.add('hidden');
+    }
+
+    function renderAdminTables() {
+      const data = getAppData();
+
+      // Render Admin Committees
+      const adminComm = document.getElementById('admin-committee-list');
+      adminComm.innerHTML = '';
+      data.committees.forEach(c => {
+        const countriesList = c.countries ? c.countries.join(', ') : 'None';
+        adminComm.innerHTML += `
+          <div class="bg-navy-900 p-4 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center text-xs border border-gray-800 gap-3">
+            <div>
+              <strong class="text-gold-400 text-sm">${c.name}</strong><br>
+              <span class="text-gray-300">Agenda: ${c.agenda}</span><br>
+              <span class="text-gray-400 mt-1 block">Countries (${c.countries ? c.countries.length : 0}): ${countriesList}</span>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="editCountriesPrompt(${c.id})" class="px-2.5 py-1 bg-burgundy-800 hover:bg-burgundy-700 text-gold-400 rounded font-semibold">Edit Countries</button>
+              <button onclick="deleteCommittee(${c.id})" class="px-2.5 py-1 bg-red-900/60 hover:bg-red-900 text-red-300 rounded"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+      });
+
+      // Render Admin Resources
+      const adminRes = document.getElementById('admin-resource-list');
+      adminRes.innerHTML = '';
+      data.resources.forEach(r => {
+        adminRes.innerHTML += `
+          <div class="bg-navy-900 p-3 rounded-lg flex justify-between items-center text-xs border border-gray-800">
+            <div>
+              <span class="text-gray-400 font-bold">[${r.type}]</span> <strong class="text-white">${r.title}</strong> - <a href="${r.url}" target="_blank" class="text-gold-400 underline">${r.url}</a>
+            </div>
+            <button onclick="deleteResource(${r.id})" class="text-red-400 hover:text-red-300 ml-4 p-1"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        `;
+      });
+
+      // Render Registrations
+      const regTable = document.getElementById('admin-registration-table');
+      document.getElementById('reg-count').innerText = data.registrations.length;
+      regTable.innerHTML = '';
+
+      if (data.registrations.length === 0) {
+        regTable.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-500">No responses recorded yet.</td></tr>`;
+        return;
+      }
+
+      data.registrations.forEach(r => {
+        const isVerified = r.status === 'Verified';
+        regTable.innerHTML += `
+          <tr class="hover:bg-navy-800/50">
+            <td class="p-3 font-semibold text-white">${r.name}<br><span class="text-[10px] text-gray-400 font-normal">${r.timestamp}</span></td>
+            <td class="p-3">${r.email}<br><span class="text-gray-400">${r.phone}</span></td>
+            <td class="p-3 text-gray-300">${r.institution}</td>
+            <td class="p-3"><strong class="text-gold-400">${r.committee}</strong><br><span class="text-gray-400">Portfolio: ${r.portfolio}</span></td>
+            <td class="p-3">
+              ${r.screenshot ? `<button onclick="viewImg('${r.screenshot}')" class="text-gold-400 underline font-semibold text-[11px]"><i class="fa-solid fa-image mr-1"></i> View Proof</button>` : '<span class="text-gray-500">None</span>'}
+            </td>
+            <td class="p-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isVerified ? 'bg-green-900/60 text-green-300 border border-green-700' : 'bg-yellow-900/60 text-yellow-300 border border-yellow-700'}">
+                ${r.status}
+              </span>
+            </td>
+            <td class="p-3 text-right space-x-2">
+              <button onclick="toggleVerifyReg(${r.id})" class="px-2.5 py-1 ${isVerified ? 'bg-gray-700 text-gray-300' : 'bg-green-700 text-white'} rounded text-[10px] font-bold">
+                ${isVerified ? 'Unverify' : 'Verify'}
+              </button>
+              <button onclick="deleteReg(${r.id})" class="text-red-400 hover:text-red-300 p-1"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function saveEventDetails(e) {
+      e.preventDefault();
+      const data = getAppData();
+      data.dates = document.getElementById('edit-dates').value;
+      data.venue = document.getElementById('edit-venue').value;
+      data.fee = document.getElementById('edit-fee').value;
+      data.adminPassword = document.getElementById('edit-password').value;
+      saveAppData(data);
+      alert('Settings updated successfully!');
+    }
+
+    function addCommitteePrompt() {
+      const name = prompt('Enter Committee Name:');
+      if (!name) return;
+      const agenda = prompt('Enter Agenda for ' + name + ':');
+      if (!agenda) return;
+      const countriesInput = prompt('Enter comma-separated country portfolios (e.g. India, USA, France):', 'India, USA, UK, France');
+      const countries = countriesInput ? countriesInput.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+      const data = getAppData();
+      data.committees.push({ id: Date.now(), name, agenda, countries });
+      saveAppData(data);
+      renderAdminTables();
+    }
+
+    function editCountriesPrompt(id) {
+      const data = getAppData();
+      const comm = data.committees.find(c => c.id === id);
+      if (!comm) return;
+
+      const currentList = comm.countries ? comm.countries.join(', ') : '';
+      const updated = prompt('Edit comma-separated country portfolios for ' + comm.name + ':', currentList);
+      if (updated !== null) {
+        comm.countries = updated.split(',').map(s => s.trim()).filter(Boolean);
+        saveAppData(data);
+        renderAdminTables();
+      }
+    }
+
+    function deleteCommittee(id) {
+      const data = getAppData();
+      data.committees = data.committees.filter(c => c.id !== id);
+      saveAppData(data);
+      renderAdminTables();
+    }
+
+    function addResourcePrompt() {
+      const title = prompt('Enter Title:');
+      if (!title) return;
+      const url = prompt('Enter Google Sheet or Document URL:');
+      if (!url) return;
+      const type = prompt('Enter Type (e.g., Google Sheet, PDF):', 'Google Sheet');
+
+      const data = getAppData();
+      data.resources.push({ id: Date.now(), title, url, type });
+      saveAppData(data);
+      renderAdminTables();
+    }
+
+    function deleteResource(id) {
+      const data = getAppData();
+      data.resources = data.resources.filter(r => r.id !== id);
+      saveAppData(data);
+      renderAdminTables();
+    }
+
+    function toggleVerifyReg(id) {
+      const data = getAppData();
+      const reg = data.registrations.find(r => r.id === id);
+      if (reg) {
+        reg.status = reg.status === 'Verified' ? 'Pending' : 'Verified';
+        saveAppData(data);
+        renderAdminTables();
+      }
+    }
+
+    function deleteReg(id) {
+      if (confirm('Delete this registration response?')) {
+        const data = getAppData();
+        data.registrations = data.registrations.filter(r => r.id !== id);
+        saveAppData(data);
+        renderAdminTables();
+      }
+    }
+
+    function viewImg(src) {
+      document.getElementById('imgModalSrc').src = src;
+      document.getElementById('imgModal').classList.remove('hidden');
+    }
+
+    function closeImgModal() {
+      document.getElementById('imgModal').classList.add('hidden');
+    }
+
+    function exportToCSV() {
+      const data = getAppData();
+      if (data.registrations.length === 0) return alert('No registrations to export.');
+
+      let csv = 'Name,Email,Phone,Institution,Committee,Portfolio,Status,Registration Date\n';
+      data.registrations.forEach(r => {
+        csv += `"${r.name}","${r.email}","${r.phone}","${r.institution}","${r.committee}","${r.portfolio}","${r.status}","${r.timestamp}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('href', url);
+      a.setAttribute('download', 'Ephemeral_MUN_Registrations.csv');
+      a.click();
+    }
+
+    window.onload = function() {
+      renderApp();
+      startCountdown();
+    };
+  </script>
+</body>
+</html>
