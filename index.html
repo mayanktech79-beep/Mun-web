@@ -138,8 +138,8 @@
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
-    if (distance = 0) {
-      // If the countdown is over
+    if (distance < 0) {
+      // If the countdown is 00
       document.getElementById("countdown-timer").innerHTML = `
         <div class="col-span-4 bg-navy-900 p-4 rounded-xl border border-gold-500/25 text-center">
           <span class="font-serif font-bold text-xl text-gold-400">The Conference is Live Now!</span>
