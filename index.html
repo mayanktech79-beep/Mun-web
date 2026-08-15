@@ -130,7 +130,8 @@
           </div>
         </div>
       </div>
-function startCountdown() {
+<script>
+      function startCountdown() {
     // Fetch the target date from your app data or define it directly
     const appData = getAppData();
     const eventDateString = appData.dates; // e.g., "October 31, 2026" or "2026-10-31"
@@ -178,7 +179,8 @@ function updateElementText(id, text) {
         el.innerText = text;
     }
 }
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 text-center">
+</script>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 text-center">
         <div class="glass-card p-5 rounded-xl">
           <i class="fa-solid fa-calendar-days text-gold-500 text-xl mb-2"></i>
           <span class="block text-xs uppercase tracking-wider text-gray-400">Dates</span>
