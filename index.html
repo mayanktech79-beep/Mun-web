@@ -133,13 +133,13 @@
 
 <script>
   // Set the target date for the conference (October 31, 2026 at 09:00:00)
-  const targetDate = new Date('2026-10-31T09:00:00').getTime();
+  const targetDate = new Date('2026-10-31T09:00:00Z').getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
     if (distance < 0) {
-      // If the countdown is 00
+      // If the countdown is over
       document.getElementById("countdown-timer").innerHTML = `
         <div class="col-span-4 bg-navy-900 p-4 rounded-xl border border-gold-500/25 text-center">
           <span class="font-serif font-bold text-xl text-gold-400">The Conference is Live Now!</span>
