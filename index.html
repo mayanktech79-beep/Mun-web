@@ -130,7 +130,54 @@
           </div>
         </div>
       </div>
+function startCountdown() {
+    // Fetch the target date from your app data or define it directly
+    const appData = getAppData();
+    const eventDateString = appData.dates; // e.g., "June 27, 2026" or "2026-06-27"
+    
+    if (!eventDateString) return;
 
+    const targetDate = new Date(eventDateString).getTime();
+
+    // If the interval is already running, clear it to prevent duplication
+    if (window.countdownInterval) {
+        clearInterval(window.countdownInterval);
+    }
+
+    window.countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(window.countdownInterval);
+            // Optional: update text when the event starts/passes
+            const timerEl = document.getElementById('countdown-container');
+            if (timerEl) timerEl.innerHTML = "<span class='text-gold-400 font-bold'>Event is Live!</span>";
+            return;
+        }
+
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update DOM elements if they exist
+        updateElementText('days', String(days).padStart(2, '0'));
+        updateElementText('hours', String(hours).padStart(2, '0'));
+        updateElementText('minutes', String(minutes).padStart(2, '0'));
+        updateElementText('seconds', String(seconds).padStart(2, '0'));
+        
+    }, 1000);
+}
+
+// Helper function to safely update text content without throwing null errors
+function updateElementText(id, text) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.innerText = text;
+    }
+}
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10 text-center">
         <div class="glass-card p-5 rounded-xl">
           <i class="fa-solid fa-calendar-days text-gold-500 text-xl mb-2"></i>
