@@ -113,15 +113,15 @@
         <span class="block text-xs uppercase tracking-widest text-gold-400 font-bold mb-3"><i class="fa-solid fa-hourglass-start mr-1"></i> Conference Countdown</span>
         <div id="countdown-timer" class="grid grid-cols-4 gap-2 text-center">
           <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
-            <span id="cd-days" class="block text-2xl md:text-3xl font-serif font-bold text-white">76</span>
+            <span id="cd-days" class="block text-2xl md:text-3xl font-serif font-bold text-white">00</span>
             <span class="text-[10px] uppercase text-gray-400">Days</span>
           </div>
           <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
-            <span id="cd-hours" class="block text-2xl md:text-3xl font-serif font-bold text-white">19</span>
+            <span id="cd-hours" class="block text-2xl md:text-3xl font-serif font-bold text-white">00</span>
             <span class="text-[10px] uppercase text-gray-400">Hours</span>
           </div>
           <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
-            <span id="cd-mins" class="block text-2xl md:text-3xl font-serif font-bold text-white">2</span>
+            <span id="cd-mins" class="block text-2xl md:text-3xl font-serif font-bold text-white">00<</span>
             <span class="text-[10px] uppercase text-gray-400">Minutes</span>
           </div>
           <div class="bg-navy-900 p-3 rounded-xl border border-gold-500/20">
@@ -131,13 +131,12 @@
         </div>
       </div>
 <script>
-  // Set the target date for the conference (October 31, 2026 at 00:00:00)
-  const targetDate = new Date("October 31, 2026 00:00:00").getTime();
+  // Set the target date for the conference (October 31, 2026 at 09:00:00)
+  const targetDate = new Date("October 31, 2026 09:00:00").getTime();
 
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
-
     if (distance < 0) {
       // If the countdown is over
       document.getElementById("countdown-timer").innerHTML = `
